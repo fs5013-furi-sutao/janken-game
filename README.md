@@ -50,6 +50,25 @@ private static void playJanken(int round, List<Boolean> isWinHistory) {
 }
 ```
 
+### getEachHandsWithoutAiko メソッド
+
+コンピュータとユーザのじゃんけんの手を取得する（あいこが続く間は再度、手を取得し続ける）
+
+``` java
+private static int[] getEachHandsWithoutAiko() {
+    int[] eachHandsAsIndex = getEachHands();
+    showEachHands(eachHandsAsIndex);
+
+    if (isAiko(eachHandsAsIndex)) {
+        show(MESSAGE_FOR_RESULT_AIKO);
+        showBlankLine(ONE_LINE);
+        showWithNoBreak(MESSAGE_FOR_REQUIRE_USER_HAND_AT_AIKO);
+        return getEachHandsWithoutAiko();
+    }
+    return eachHandsAsIndex;
+}
+```
+
 ### 実行結果例
 
 ``` java
