@@ -43,7 +43,7 @@ public class JankenGame {
     private static final String MESSAGE_FOR_USER_WIN = "あなたの勝ち";
     private static final String MESSAGE_FOR_USER_LOSE = "あなたの負け";
     private static final String MESSAGE_FOR_USER_DRAW = "引き分け";
-    private static final String MESSAGE_FORMAT_FOR_COUNT_WIN_LOSE = "%d勝 %d負 で";
+    private static final String MESSAGE_FORMAT_FOR_COUNT_WIN_LOSE = "%d勝 %d敗 で";
 
     public static void main(String[] args) {
         show(MESSAGE_FOR_GAME_NAME);
