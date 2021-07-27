@@ -12,7 +12,7 @@ public class JankenGame {
 
     // じゃんけんの勝負回数設定
     // 1 にした場合は IS_ROUND_CONFIG_1 を true にする
-    private static final int MAX_ROUND_CONFIG = 4;
+    private static final int MAX_ROUND_CONFIG = 3;
     private static final boolean IS_ROUND_CONFIG_1 = false;
 
     // じゃんけん結果（お互いの手）配列のインデックス設定
@@ -268,10 +268,13 @@ public class JankenGame {
 
     private static void showEachHands(int[] eachHandsAsIndex) {
         System.out.format(MESSAGE_FORMAT_FOR_SHOW_EACH_HANDS,
-                eachHandsAsIndex[COM], eachHandsAsIndex[USER]);
+                HANDS[eachHandsAsIndex[COM]], HANDS[eachHandsAsIndex[USER]]);
     }
 
     private static void showComHand(boolean isDebugMode, int handIndex) {
+        if (!isDebugMode) {
+            return;
+        }
         showBlankLine(ONE_LINE);
         System.out.format(MESSAGE_FORMAT_FOR_DEBUG_COM_HAND, HANDS[handIndex]);
     }

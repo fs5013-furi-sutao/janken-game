@@ -1,18 +1,129 @@
-## Getting Started
+## じゃんけんゲーム
 
-Welcome to the VS Code Java world. Here is a guideline to help you get started to write Java code in Visual Studio Code.
+じゃんけんゲームのサンプルコードです。クラスを使用していません。
 
-## Folder Structure
+## 実装の内容
 
-The workspace contains two folders by default, where:
+以下に [JankenGame.java](./src/JankenGame.java) で行った文字列の圧縮ロジックや実装を説明します
 
-- `src`: the folder to maintain sources
-- `lib`: the folder to maintain dependencies
+### main メソッド
 
-Meanwhile, the compiled output files will be generated in the `bin` folder by default.
+じゃんけんを実施して、その結果を表示する
 
-> If you want to customize the folder structure, open `.vscode/settings.json` and update the related settings there.
+``` java
+public static void main(String[] args) {
+    show(MESSAGE_FOR_GAME_NAME);
 
-## Dependency Management
+    int round = ROUND_OF_START;
+    List<Boolean> isWinHistory = new ArrayList<>();
 
-The `JAVA PROJECTS` view allows you to manage your dependencies. More details can be found [here](https://github.com/microsoft/vscode-java-dependency#manage-dependencies).
+    playJanken(round, isWinHistory);
+    showFinalResult(isWinHistory);
+}
+```
+
+### playJanken メソッド
+
+定数 MAX_ROUND_CONFIG で設定した回数分だけ、じゃんけん勝負を行う（あいこは、勝負回数に含めない）
+
+``` java
+// じゃんけんの勝負回数設定
+private static final int MAX_ROUND_CONFIG = 3;
+
+private static void playJanken(int round, List<Boolean> isWinHistory) {
+    showRound(round);
+    show(MESSAGE_FOR_GAME_DESCRIPTION);
+    showSelectHandMenu();
+    showBlankLine(ONE_LINE);
+
+    showWithNoBreak(MESSAGE_FOR_REQUIRE_USER_HAND);
+
+    int[] eachHandsAsIndex = getEachHandsWithoutAiko();
+    showJudgeResultExcludingAiko(eachHandsAsIndex);
+    updateIsWinHistory(isWinHistory, eachHandsAsIndex);
+    round++;
+
+    if (round <= MAX_ROUND_CONFIG) {
+        playJanken(round, isWinHistory);
+        return;
+    }
+}
+```
+
+### 実行結果例
+
+``` java
+private static final boolean IS_DEBUG_MODE = false;
+
+// じゃんけんの勝負回数設定
+// 1 にした場合は IS_ROUND_CONFIG_1 を true にする
+private static final int MAX_ROUND_CONFIG = 4;
+private static final boolean IS_ROUND_CONFIG_1 = false;
+```
+
+定数を上記の設定でコードを実行をした場合
+
+``` console
+じゃんけん勝負
+1 回目: ==========
+グーチョキパーを数字で入力してね
+0: グー
+1: チョキ
+2: パー
+
+最初はぐー、じゃんけん： 1
+パー(COM)とチョキ(Player)で… 
+あなたの勝ち
+
+2 回目: ==========
+グーチョキパーを数字で入力してね
+0: グー
+1: チョキ
+2: パー
+
+最初はぐー、じゃんけん： 2
+パー(COM)とパー(Player)で… 
+あいこだよ！
+
+あいこで： 2
+パー(COM)とパー(Player)で… 
+あいこだよ！
+
+あいこで： 1
+チョキ(COM)とチョキ(Player)で… 
+あいこだよ！
+
+あいこで： B
+数字で入力してください
+0
+チョキ(COM)とグー(Player)で… 
+あなたの勝ち
+
+3 回目: ==========
+グーチョキパーを数字で入力してね
+0: グー
+1: チョキ
+2: パー
+
+最初はぐー、じゃんけん： 0
+チョキ(COM)とグー(Player)で… 
+あなたの勝ち
+
+4 回目: ==========
+グーチョキパーを数字で入力してね
+0: グー
+1: チョキ
+2: パー
+
+最初はぐー、じゃんけん： 2
+パー(COM)とパー(Player)で… 
+あいこだよ！
+
+あいこで： 3
+0 ～ 2 の範囲の数字で入力してください 
+0
+チョキ(COM)とグー(Player)で… 
+あなたの勝ち
+
+4勝 0負 であなたの勝ち
+```
