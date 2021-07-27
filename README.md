@@ -144,5 +144,5 @@ private static final boolean IS_ROUND_CONFIG_1 = false;
 チョキ(COM)とグー(Player)で… 
 あなたの勝ち
 
-4勝 0負 であなたの勝ち
+4勝 0敗 であなたの勝ち
 ```
