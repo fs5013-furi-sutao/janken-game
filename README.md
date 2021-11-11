@@ -4,7 +4,7 @@
 
 ## 実装の内容
 
-以下に [JankenGame.java](./src/JankenGame.java) で行った文字列の圧縮ロジックや実装を説明します
+以下に [JankenGame.java](./src/JankenGame.java) で行ったロジックや実装を説明します
 
 ### main メソッド
 
